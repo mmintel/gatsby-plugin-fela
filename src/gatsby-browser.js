@@ -7,10 +7,13 @@ import { createRenderer } from 'fela'
 
 exports.replaceRouterComponent = ({ history }, pluginOptions) => {
   const renderer = createRenderer(pluginOptions.config)
+  const theme = pluginOptions.theme || {};
   rehydrate(renderer)
   const ConnectedRouterWrapper = ({ children }) => (
     <Provider renderer={renderer}>
-      <Router history={history}>{children}</Router>
+      <ThemeProvider theme={theme}>
+        <Router history={history}>{children}</Router>
+      </ThemeProvider>
     </Provider>
   )
 

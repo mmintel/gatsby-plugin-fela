@@ -1,9 +1,9 @@
 import React from "react"
 import { renderToString } from "react-dom/server"
-import { Provider } from 'react-fela'
+import { Provider, ThemeProvider } from 'react-fela'
 
 import { createRenderer } from 'fela'
-import { renderToMarkup, renderToSheetList } from 'fela-dom'
+import { renderToSheetList } from 'fela-dom'
 
 
 exports.replaceRenderer = ({
@@ -12,9 +12,12 @@ exports.replaceRenderer = ({
   setHeadComponents,
 }, pluginOptions) => {
   const renderer = createRenderer(pluginOptions.config)
+  const theme = pluginOptions.theme || {};
   const bodyHTML = renderToString(
     <Provider renderer={renderer}>
-      {bodyComponent}
+      <ThemeProvider theme={theme}>
+        {bodyComponent}
+      </ThemeProvider>
     </Provider>
   );
   const sheetList = renderToSheetList(renderer)
