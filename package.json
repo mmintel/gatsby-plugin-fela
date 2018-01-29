@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-fela",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Gatsby plugin that adds support for fela.js",
   "main": "index.js",
   "scripts": {
