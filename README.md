@@ -21,10 +21,6 @@ or with fela config, e.g. to add plugins:
 plugins: [{
   resolve: `gatsby-plugin-fela`,
   options: {
-    theme: {
-      color: '#333',
-      //... all your theme settings here
-    },
     config: {
       plugins: [
         /* your fela plugins */
