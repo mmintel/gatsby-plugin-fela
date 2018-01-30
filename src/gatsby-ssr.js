@@ -1,16 +1,23 @@
 import React from "react"
 import { renderToString } from "react-dom/server"
 import { Provider } from 'react-fela'
-
 import { createRenderer } from 'fela'
 import { renderToSheetList } from 'fela-dom'
+import fs from 'fs';
+import _eval from 'eval';
 
 exports.replaceRenderer = ({
   bodyComponent,
   replaceBodyHTMLString,
   setHeadComponents,
 }, pluginOptions) => {
-  const renderer = createRenderer(pluginOptions.config)
+  let config;
+  try {
+    config = eval(fs.readFileSync('./fela.config.js', 'utf8'));
+  } catch (err) {
+    console.log(err);
+  }
+  const renderer = createRenderer(config)
   const bodyHTML = renderToString(
     <Provider renderer={renderer}>
       {bodyComponent}

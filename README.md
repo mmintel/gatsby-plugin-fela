@@ -15,20 +15,45 @@ Add the plugin to your `gatsby-config.js`.
 plugins: [`gatsby-plugin-fela`];
 ```
 
-or with fela config, e.g. to add plugins:
+to configure the fela `renderer` add a `fela.config.js` file to the root of your gatsby project:
 
 ```javascript
-plugins: [{
-  resolve: `gatsby-plugin-fela`,
-  options: {
-    config: {
-      plugins: [
-        /* your fela plugins */
-      ]
-    }
-  }
-}];
+module.exports = {
+  plugins: [ /* add your plugins here */ ],
+  enhancers: [ /* add your enhancers here */ ]
+  // ...
+}
 ```
+
+Unfortunately I didn't find a way to use this file for SSR and browser, because I wasn't able to load this file from the browser without having access to node and webpack imports are very limited. So at the time this plugin only adds fela for server side rendering. You have to add it in the browser yourself. So create a `gatsby-browser.js` file in the root of your gatsby project and add this code:
+
+```javascript
+import React from 'react'
+import { Router } from 'react-router-dom'
+import { rehydrate } from 'fela-dom'
+import { Provider } from 'react-fela'
+import { createRenderer } from 'fela'
+
+exports.wrapRootComponent = ({ Root }, pluginOptions) => {
+  let config;
+  try {
+    config = require(`./fela.config.js`)
+  } catch (e) {
+    console.log(e)
+  }
+  const renderer = createRenderer(config)
+  rehydrate(renderer)
+  const wrappedRootComponent = ({ children }) => (
+    <Provider renderer={renderer}>
+      <Root />
+    </Provider>
+  )
+
+  return wrappedRootComponent
+}
+```
+
+If you have an idea to solve this problem feel free to open a pull request.
 
 ## Example
 
