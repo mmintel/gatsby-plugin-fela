@@ -1,4 +1,4 @@
-# gatsby-plugin-fela [CURRENTLY NOT MAINTAINED]
+# gatsby-plugin-fela
 
 Provide drop-in support for using the css-in-js library
 [fela.js](http://fela.js.org/) including server rendering.
