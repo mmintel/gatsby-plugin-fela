@@ -29,10 +29,8 @@ Unfortunately I didn't find a way to use this file for SSR and browser, because 
 
 ```javascript
 import React from 'react'
-import { Router } from 'react-router-dom'
-import { Provider } from 'react-fela'
+import { RendererProvider } from 'react-fela'
 import { createRenderer } from 'fela'
-
 
 exports.wrapRootElement = ({ element }) => {
   let config;
