@@ -51,6 +51,20 @@ exports.wrapRootElement = ({ element }) => {
 
 If you have an idea to solve this problem feel free to open a pull request.
 
+### Importing fela plugins
+
+When you're importing fela plugins, don't forget your `fela.config.js` file is a commonjs file, but plugins are transpiled using babel from ES6 import/export syntax into format that uses `interopRequireDefault` function. So for correct import of the plugin, you have to import `.default` from the package as shown at the example below.
+
+```js
+const unit = require("fela-plugin-unit").default
+
+module.exports = {
+  plugins: [
+    unit(),
+  ],
+}
+```
+
 ## Example
 
 https://github.com/mmintel/example-gatsby-fela
