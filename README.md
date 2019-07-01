@@ -29,30 +29,41 @@ Unfortunately I didn't find a way to use this file for SSR and browser, because 
 
 ```javascript
 import React from 'react'
-import { Router } from 'react-router-dom'
-import { Provider } from 'react-fela'
+import { RendererProvider } from 'react-fela'
 import { createRenderer } from 'fela'
 
-exports.wrapRootComponent = ({ Root }, pluginOptions) => {
+exports.wrapRootElement = ({ element }) => {
   let config;
   try {
-    config = require(`./fela.config.js`)
+    config = require(`./fela.config.js`);
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-  const renderer = createRenderer(config)
+  const renderer = createRenderer(config);
 
-  const wrappedRootComponent = ({ children }) => (
-    <Provider renderer={renderer}>
-      <Root />
-    </Provider>
-  )
-
-  return wrappedRootComponent
-}
+  return (
+    <RendererProvider renderer={renderer}>
+      {element}
+    </RendererProvider>
+  );
+};
 ```
 
 If you have an idea to solve this problem feel free to open a pull request.
+
+### Importing fela plugins
+
+When you're importing fela plugins, don't forget your `fela.config.js` file is a commonjs file, but plugins are transpiled using babel from ES6 import/export syntax into format that uses `interopRequireDefault` function. So for correct import of the plugin, you have to import `.default` from the package as shown at the example below.
+
+```js
+const unit = require("fela-plugin-unit").default
+
+module.exports = {
+  plugins: [
+    unit(),
+  ],
+}
+```
 
 ## Example
 

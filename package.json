@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-fela",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Gatsby plugin that adds support for fela.js",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "react-fela": "^10.1.0"
   },
   "peerDependencies": {
-    "gatsby": "^1.0.0"
+    "gatsby": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0"
