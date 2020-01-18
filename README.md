@@ -1,5 +1,7 @@
 # gatsby-plugin-fela
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mmintel/gatsby-plugin-fela.svg)](https://greenkeeper.io/)
+
 Provide drop-in support for using the css-in-js library
 [fela.js](http://fela.js.org/) including server rendering.
 
