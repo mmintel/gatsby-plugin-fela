@@ -29,9 +29,9 @@
   "dependencies": {
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "fela": "^10.1.0",
-    "fela-dom": "^10.1.0",
-    "react-fela": "^10.1.0"
+    "fela": "^11.0.2",
+    "fela-dom": "^11.0.2",
+    "react-fela": "^11.0.2"
   },
   "peerDependencies": {
     "gatsby": "^2.0.0"
